@@ -16,7 +16,6 @@
             <entry key="dataFormat" value="MESSAGE"/>
         </cxf:properties>
     </cxf:cxfEndpoint>
-    
     <camelContext id="camel" streamCache="true"
         xmlns="http://camel.apache.org/schema/spring"
         xmlns:asi="http://siebel.com/asi/"
@@ -101,7 +100,14 @@
             <setBody id="route-setBodyCRM">
                 <simple>
 		&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:asi="http://siebel.com/asi/" xmlns:ord="http://www.siebel.com/xml/Order%20Interface"&gt;
-   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Header&gt;
+      &lt;wsse:Security xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/07/secext"&gt;
+         &lt;wsse:UsernameToken xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"&gt;
+            &lt;wsse:Username>TMCVPRDADMIN&lt;/wsse:Username&gt;
+            &lt;wsse:Password Type="wsse:PasswordText">stmcvprdadmin&lt;/wsse:Password&gt;
+         &lt;/wsse:UsernameToken&gt;
+      &lt;/wsse:Security&gt;
+&lt;/soapenv:Header&gt;
    &lt;soapenv:Body&gt;
 &lt;asi:TMCVCPPUROrderInsertOrUpdate_Input&gt;
          &lt;ord:ListOfOrderInterface&gt;
@@ -553,7 +559,7 @@
 	</simple>
             </setBody>
             <log id="_log1" message="******** REQUEST BODY ********* ${body}"/>
-            <to id="_to3" pattern="InOut" uri="cxf:bean:rsAPI"/>
+            <!--to id="_to3" pattern="InOut" uri="cxf:bean:rsAPI"/-->
         </route>
     </camelContext>
 </beans>

@@ -601,7 +601,7 @@
   </binding>
   <service name="Siebel_spcOrder">
     <port binding="tns:Default" name="Default">
-      <soap:address location="http://localhost:8086/TMCVCPPUROrderInsertOrUpdate"/>
+      <soap:address location="http://0.0.0.0:8086/TMCVCPPUROrderInsertOrUpdate"/>
     </port>
   </service>
 </definitions>
